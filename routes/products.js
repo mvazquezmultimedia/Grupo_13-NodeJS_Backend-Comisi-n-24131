@@ -3,7 +3,13 @@ var router = express.Router();
 
 /* GET products listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with products');
+  
+    const product = {
+        "id": 1,
+        "name" : "Product name",
+
+     };
+  res.send(product);
 });
 
 module.exports = router;
