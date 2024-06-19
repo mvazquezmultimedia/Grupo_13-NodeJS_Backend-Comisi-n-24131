@@ -8,11 +8,11 @@ var connection = config.connection
 /* GET products listing. */
 router.get('/', function(req, res, next) {
   
-    // Fetch users from the database
+    // Fetch products from the database
     connection.query('SELECT * FROM products', (error, products) => {
         if (error) {
-            console.error('Error fetching users from the database: ' + error.stack);
-            return res.status(500).json({ error: 'Failed to fetch users' });
+            console.error('Error fetching products from the database: ' + error.stack);
+            return res.status(500).json({ error: 'Failed to fetch products' });
     }
 
     // Send the fetched data as a response
