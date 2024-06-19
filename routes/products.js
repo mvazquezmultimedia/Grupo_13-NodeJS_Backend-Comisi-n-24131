@@ -30,18 +30,18 @@ router.get('/', function(req, res, next) {
 });
 
 // POST
-router.post('/', (req, res) => {
-    res.send('Got a POST request')
+router.post('/:id', (req, res) => {
+    res.send('Got a POST request to create products')
   })
 
 // PUT
-router.put('/product', (req, res) => {
-    res.send('Got a PUT request at /product')
+router.put('/:id', (req, res) => {
+    res.send('Got a PUT request to update a product')
 })
 
 // DELETE
-router.delete('/product', (req, res) => {
-    res.send('Got a DELETE request at /product')
+router.delete('/:id', (req, res) => {
+    res.send('Got a DELETE request to delete a product')
 })
 
 module.exports = router;
