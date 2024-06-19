@@ -17,16 +17,31 @@ const connection = mysql.createConnection({
 router.get('/', function(req, res, next) {
   
     // Fetch users from the database
-    connection.query('SELECT * FROM products', (error, results) => {
+    connection.query('SELECT * FROM products', (error, products) => {
         if (error) {
             console.error('Error fetching users from the database: ' + error.stack);
             return res.status(500).json({ error: 'Failed to fetch users' });
     }
 
     // Send the fetched data as a response
-    res.json(results);
+    res.json(products);
     });
 
 });
+
+// POST
+router.post('/', (req, res) => {
+    res.send('Got a POST request')
+  })
+
+// PUT
+router.put('/product', (req, res) => {
+    res.send('Got a PUT request at /product')
+})
+
+// DELETE
+router.delete('/product', (req, res) => {
+    res.send('Got a DELETE request at /product')
+})
 
 module.exports = router;
