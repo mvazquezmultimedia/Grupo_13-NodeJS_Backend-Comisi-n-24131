@@ -1,17 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-
-// const mysql = require('mysql');
-
-// // Create a connection to the database
-// const connection = mysql.createConnection({
-//   host: 'mysql-metamorfosys.alwaysdata.net',
-//   user: '364431_dev',
-//   password: 'pzj-jqh2EPR4rxm5bgr',
-//   database: "metamorfosys_mc_celulares"        
-// });
-
+// Import connection con la DB
 var config = require('../db/config.js');
 var connection = config.connection
 
