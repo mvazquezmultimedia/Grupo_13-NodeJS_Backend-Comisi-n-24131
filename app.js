@@ -40,4 +40,26 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+
+
+const mysql = require('mysql');
+
+// Create a connection to the database
+const connection = mysql.createConnection({
+  host: 'mysql-metamorfosys.alwaysdata.net',
+  user: '364431_dev',
+  password: 'pzj-jqh2EPR4rxm5bgr',
+  database: "metamorfosys_mc_celulares"        
+});
+
+// Connect to the MySQL database
+connection.connect((err) => {
+  if (err) {
+      console.error('Error connecting to the database: ' + err.stack);
+      return;
+}
+  console.log('Connected to the database as ID ' + connection.threadId);
+});
+
 module.exports = app;
