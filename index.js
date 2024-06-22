@@ -12,8 +12,15 @@ var brandsRouter = require('./routes/brands');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
+const layouts = require("express-ejs-layouts");
+app.use(express.static(path.join(__dirname, "public")));
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "./views"));
+
+app.use(layouts);
+app.set("layout", "layouts/layout");
+
 
 app.use(logger('dev'));
 app.use(express.json());
