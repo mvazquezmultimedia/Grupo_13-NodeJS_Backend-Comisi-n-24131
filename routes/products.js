@@ -5,35 +5,14 @@ var router = express.Router();
 var config = require('../db/config.js');
 var connection = config.connection
 
-/* GET products listing. */
-router.get('/', function(req, res, next) {
-  
-    // Fetch products from the database
-    connection.query('SELECT * FROM products', (error, products) => {
-        if (error) {
-            console.error('Error fetching products from the database: ' + error.stack);
-            return res.status(500).json({ error: 'Failed to fetch products' });
-    }
+const controller = require("../controllers/products.controller");
 
-    // Send the fetched data as a response
-    res.json(products);
-    });
+// Prefijo: /productos
+router.get("/", controller.index);
+router.get("/:id", controller.show);
+// router.put("/:id", controller.update);
+// router.delete("/:id", controller.destroy);
 
-});
-
-// POST
-router.post('/:id', (req, res) => {
-    res.send('Got a POST request to create products')
-  })
-
-// PUT
-router.put('/:id', (req, res) => {
-    res.send('Got a PUT request to update a product')
-})
-
-// DELETE
-router.delete('/:id', (req, res) => {
-    res.send('Got a DELETE request to delete a product')
-})
+// router.post("/", controller.create);
 
 module.exports = router;
