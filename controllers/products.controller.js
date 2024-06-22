@@ -2,6 +2,8 @@
 var config = require('../db/config.js');
 var connection = config.connection
 
+// GET ALL PRODUCTS
+// /products
 const index = (req, res) => {
     
     const sql = "SELECT * FROM products";
@@ -16,6 +18,8 @@ const index = (req, res) => {
   
 };
 
+// PUT BY ID if product exists
+// /products/3
 const update = (req, res) => {
     const { id } = req.params;
     const { name, description, model, price } = req.body;
@@ -38,9 +42,10 @@ const update = (req, res) => {
       res.json(product);
     });
   };
-  
-  
-  const destroy = (req, res) => {
+
+// DELETE BY ID if product exists
+// /products/5
+const destroy = (req, res) => {
     const { id } = req.params;
   
     let sql = "SELECT * FROM products WHERE id = ?";
@@ -70,9 +75,11 @@ const update = (req, res) => {
   
       res.json({ mensaje: "Deleted product" });
     });
-  };
+};
 
-  const show = (req, res) => {
+// GET BY ID
+// /products/1
+const show = (req, res) => {
     const { id } = req.params;
   
     const sql = "SELECT * FROM products WHERE id = ?";
@@ -89,12 +96,29 @@ const update = (req, res) => {
   
       res.json(product[0]);
     });
-  };
+};
+
+const create = (req, res) => {
+    const { id, name, description, model, price, category_id, brand_id } = req.body;
+  
+    const sql = "INSERT INTO products (id, name, description, model, price, category_id, brand_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+      connection.query(sql, [id, name, description, model, price , category_id, brand_id], (error, result) => {
+      console.log(result);
+      if (error) {
+        console.error('Error creating product into the database: ' + error.stack);
+        return res.status(500).json({ error: "Failed to create product" });
+      }
+  
+      const product = { ...req.body};
+  
+      res.json(product);
+    });
+};
 
 module.exports = {
     index,
     show,
     update,
     destroy,
-    // create
+    create
   };
