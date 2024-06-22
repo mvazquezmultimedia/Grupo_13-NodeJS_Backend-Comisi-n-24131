@@ -17,56 +17,59 @@ const index = (req, res) => {
 };
 
 const update = (req, res) => {
-    // const { id } = req.params;
-    // const { nombre, precio, stock } = req.body;
+    const { id } = req.params;
+    const { name, description, model, price } = req.body;
   
-    // const sql =
-    //   "UPDATE productos SET nombre = ?, precio = ?, stock = ? WHERE id = ?";
-    // db.query(sql, [nombre, precio, stock, id], (error, result) => {
-    //   console.log(result);
-    //   if (error) {
-    //     return res.status(500).json({ error: "Intente mas tarde" });
-    //   }
+    const sql =
+      "UPDATE products SET name = ?, description = ?, model = ?, price = ? WHERE id = ?";
+      connection.query(sql, [name, description, model, price , id], (error, result) => {
+      console.log(result);
+      if (error) {
+        console.error('Error fetching products from the database: ' + error.stack);
+        return res.status(500).json({ error: "Failed to fetch products" });
+      }
   
-    //   if (result.affectedRows == 0) {
-    //     return res.status(404).send({ error: "No existe el producto" });
-    //   }
+      if (result.affectedRows == 0) {
+        return res.status(404).send({ error: "Product not exists" });
+      }
   
-    //   const producto = { ...req.body, ...req.params };
+      const product = { ...req.body, ...req.params };
   
-    //   res.json(producto);
-    // });
+      res.json(product);
+    });
   };
   
+  
   const destroy = (req, res) => {
-    // const { id } = req.params;
+    const { id } = req.params;
   
-    // let sql = "SELECT * FROM products WHERE id = ?";
-    // db.query(sql, [id], (error, rows) => {
-    //   if (error) {
-    //     return res.status(500).json({ error: "Intente mas tarde" });
-    //   }
+    let sql = "SELECT * FROM products WHERE id = ?";
+    connection.query(sql, [id], (error, products) => {
+      if (error) {
+        console.error('Error fetching products from the database: ' + error.stack);
+        return res.status(500).json({ error: "Failed to fetch products" });
+      }
   
-    //   if (rows.length == 0) {
-    //     return res.status(404).send({ error: "No existe el producto" });
-    //   }
+      if (products.length == 0) {
+        return res.status(404).send({ error: "Product not exists" });
+      }
   
-    //   fs.unlinkSync(path.resolve(__dirname, "../public/uploads", rows[0].imagen));
-    // });
+    });
   
-    // sql = "DELETE FROM productos WHERE id = ?";
-    // db.query(sql, [id], (error, result) => {
-    //   // console.log(result);
-    //   if (error) {
-    //     return res.status(500).json({ error: "Intente mas tarde" });
-    //   }
+    sql = "DELETE FROM products WHERE id = ?";
+    connection.query(sql, [id], (error, result) => {
+      // console.log(result);
+      if (error) {
+        console.error('Error fetching products from the database: ' + error.stack);
+        return res.status(500).json({ error: "'Failed to detele product'" });
+      }
   
-    //   if (result.affectedRows == 0) {
-    //     return res.status(404).send({ error: "No existe el producto" });
-    //   }
+      if (result.affectedProducts == 0) {
+        return res.status(404).send({ error: "Product not exists" });
+      }
   
-    //   res.json({ mensaje: "Producto eliminado" });
-    // });
+      res.json({ mensaje: "Deleted product" });
+    });
   };
 
   const show = (req, res) => {
