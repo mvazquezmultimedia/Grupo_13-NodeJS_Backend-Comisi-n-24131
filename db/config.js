@@ -1,10 +1,11 @@
 var mysql = require('mysql');
+require("dotenv").config();
 
 config = {
-    host: 'mysql-metamorfosys.alwaysdata.net',
-    user: '364431_dev',
-    password: 'pzj-jqh2EPR4rxm5bgr',
-    database: "metamorfosys_mc_celulares"
+    host: process.env.DB_HOST,
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME 
 }
 
 var connection =mysql.createConnection(config); //added the line

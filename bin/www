@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var app = require('../index');
 var debug = require('debug')('grupo-13-nodejs-backend-comisi-n-24131:server');
 var http = require('http');
 
