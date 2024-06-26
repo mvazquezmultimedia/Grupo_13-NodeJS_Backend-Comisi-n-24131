@@ -9,6 +9,9 @@ var usersRouter = require('./routes/users');
 var productsRouter = require('./routes/products');
 var brandsRouter = require('./routes/brands');
 
+var cors = require("cors")
+app.use(cors())
+
 var app = express();
 
 // view engine setup
