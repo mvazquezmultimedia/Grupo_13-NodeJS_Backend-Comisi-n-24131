@@ -10,7 +10,17 @@ var productsRouter = require('./routes/products.route');
 var brandsRouter = require('./routes/brands.route');
 var authRouter = require('./routes/auth.route');
 
+const cors = require('cors');
+
+const config = require('./config');
+
 var app = express();
+
+var app = express();
+
+app.use(cors(
+  config.application.cors.server
+));
 
 // view engine setup
 const layouts = require("express-ejs-layouts");
