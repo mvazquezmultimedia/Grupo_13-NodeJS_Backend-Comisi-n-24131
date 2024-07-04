@@ -3,6 +3,8 @@ const router = express.Router();
 
 const controller = require("../controllers/index.controller");
 
-router.get("/", controller.index);
+const authMiddleware = require("../middlewares/auth.middleware");
+
+router.get("/", authMiddleware, controller.index);
 
 module.exports = router;
