@@ -7,7 +7,7 @@ const register = (req, res) => {
   const { email, password } = req.body;
 
   const hash = bcrypt.hashSync(password, 10);
-  console.log(hash);
+    //console.log(hash);
 
   const user = { id: Date.now(), email, password: hash };
 
