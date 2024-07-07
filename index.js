@@ -15,6 +15,7 @@ const cors = require('cors');
 const config = require('./config');
 
 var app = express();
+app.use(cors());
 
 // view engine setup
 const layouts = require("express-ejs-layouts");
