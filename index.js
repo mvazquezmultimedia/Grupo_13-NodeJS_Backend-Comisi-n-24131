@@ -10,9 +10,23 @@ var productsRouter = require('./routes/products.route');
 var brandsRouter = require('./routes/brands.route');
 var authRouter = require('./routes/auth.route');
 
+const cors = require('cors');
+
 const config = require('./config');
 
 var app = express();
+app.use(cors());
+var allowlist = [ process.env.ALLOWED_CORS_HOST ]
+
+var corsOptionsDelegate = function (req, callback) {
+  var corsOptions;
+  if (allowlist.indexOf(req.header('Origin')) !== -1) {
+    corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+  } else {
+    corsOptions = { origin: false } // disable CORS for this request
+  }
+  callback(null, corsOptions) // callback expects two parameters: error and options
+}
 
 // view engine setup
 const layouts = require("express-ejs-layouts");
@@ -31,9 +45,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/products', productsRouter);
-app.use('/brands', brandsRouter);
+app.use('/users', cors(corsOptionsDelegate), usersRouter);
+app.use('/products', cors(corsOptionsDelegate), productsRouter);
+app.use('/brands', cors(corsOptionsDelegate), brandsRouter);
 app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
