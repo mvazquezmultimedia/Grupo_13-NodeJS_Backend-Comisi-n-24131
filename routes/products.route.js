@@ -6,7 +6,14 @@ const controller = require("../controllers/products.controller");
 
 const authMiddleware = require("../middlewares/auth.middleware");
 
-var allowlist = ['http://localhost', 'http://localhost:5050', 'http://localhost:3000', '[::1]:3000', '[::1]']
+var allowlist = [
+    'https://caito3.github.io/celualres.mc/',
+    'http://localhost', 
+    'http://localhost:5050', 
+    'http://localhost:3000', 
+    '[::1]:3000', 
+    '[::1]'
+]
 
 var corsOptionsDelegate = function (req, callback) {
   var corsOptions;
